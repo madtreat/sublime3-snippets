@@ -1,41 +1,40 @@
 <snippet>
-   <description>Variable Definitions for XPlane Plugins</description>
-   <content><![CDATA[SET(LIB_DIR ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
-SET(HEADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/includes)
-SET(EXTERN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/ext)
+   <description>CMake Vars for XPlane Plugins</description>
+   <content><![CDATA[set(LIB_DIR \${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
+set(HEADER_DIR \${CMAKE_CURRENT_SOURCE_DIR}/includes)
+set(EXTERN_DIR \${CMAKE_CURRENT_SOURCE_DIR}/ext)
 
-SET(XP_DIR ${EXTERN_DIR}/xplane-sdk)
-SET(XP_HEADER_DIR ${XP_DIR}/CHeaders)
-IF(APPLE)
-  SET(XP_LIB_DIR ${XP_DIR}/Libraries/Mac)
-  FIND_LIBRARY(XPLM_LIB XPLM
-    PATHS ${XP_LIB_DIR})
-  FIND_LIBRARY(XPWidgets_LIB XPWidgets
-    PATHS ${XP_LIB_DIR})
-  # MESSAGE(STATUS "XPLM      Framework: " ${XPLM_LIB})
-  # MESSAGE(STATUS "XPWidgets Framework: " ${XPWidgets_LIB})
-ELSEIF(WIN32)
-  SET(XP_LIB_DIR ${XP_DIR}/Libraries/Win)
-ELSEIF(UNIX)
-  # There is no library linking for linux
-  SET(XP_LIB_DIR "")
-  # Instead, we have to add some extra command line options
-  ADD_DEFINITIONS(-shared -rdynamic -nodefaultlibs -undefined_warning)
-ENDIF(APPLE)
+set(XP_DIR \${EXTERN_DIR}/xplane-sdk)
+set(XP_HEADER_DIR \${XP_DIR}/CHeaders)
+if(APPLE)
+   set(XP_LIB_DIR \${XP_DIR}/Libraries/Mac)
+   find_library(XPLM_LIB XPLM
+      PATHS $\{XP_LIB_DIR})
+   find_library(XPWidgets_LIB XPWidgets
+      PATHS \${XP_LIB_DIR})
+   # message(STATUS "XPLM      Framework: " \${XPLM_LIB})
+   # message(STATUS "XPWidgets Framework: " \${XPWidgets_LIB})
+elseif(WIN32)
+   set(XP_LIB_DIR \${XP_DIR}/Libraries/Win)
+elseif(UNIX)
+   # There is no library linking for linux
+   set(XP_LIB_DIR "")
+   # Instead, we have to add some extra command line options
+   add_definitions(-shared -rdynamic -nodefaultlibs -undefined_warning)
+endif(APPLE)
 
-LINK_DIRECTORIES(
-   ${LIB_DIR}
-   ${XP_LIB_DIR}
+link_directories(
+   \${LIB_DIR}
+   \${XP_LIB_DIR}
 )
 
-INCLUDE_DIRECTORIES(
-   ${HEADER_DIR}
-   ${XP_HEADER_DIR}/XPLM
-   ${XP_HEADER_DIR}/Widgets
+include_directories(
+   \${HEADER_DIR}
+   \${XP_HEADER_DIR}/XPLM
+   \${XP_HEADER_DIR}/Widgets
 )
+$0
 ]]></content>
-   <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
    <tabTrigger>cmakeXPlanePluginVars</tabTrigger>
-   <!-- Optional: Set a scope to limit where the snippet will trigger -->
    <scope>source.cmake</scope>
 </snippet>

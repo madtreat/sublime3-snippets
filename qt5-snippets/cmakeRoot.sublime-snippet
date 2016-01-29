@@ -1,5 +1,5 @@
 <snippet>
-   <description>CMake Root CMakeLists.txt</description>
+   <description>CMake ROOT-level</description>
    <content><![CDATA[cmake_minimum_required(VERSION 2.8.12)
 project(${1:short_name})
 
@@ -117,15 +117,15 @@ endif()
 set(CMAKE_BUILD_TYPE Release)
 
 add_custom_target(debug
-  COMMAND \${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Debug \${CMAKE_SOURCE_DIR}
-  COMMAND \${CMAKE_COMMAND} --build \${CMAKE_BINARY_DIR} --target all
-  COMMENT "Switch CMAKE_BUILD_TYPE to Debug"
+   COMMAND \${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Debug \${CMAKE_SOURCE_DIR}
+   COMMAND \${CMAKE_COMMAND} --build \${CMAKE_BINARY_DIR} --target all
+   COMMENT "Switch CMAKE_BUILD_TYPE to Debug"
 )
 
 add_custom_target(release
-  COMMAND \${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Release \${CMAKE_SOURCE_DIR}
-  COMMAND \${CMAKE_COMMAND} --build \${CMAKE_BINARY_DIR} --target all
-  COMMENT "Switch CMAKE_BUILD_TYPE to Release"
+   COMMAND \${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Release \${CMAKE_SOURCE_DIR}
+   COMMAND \${CMAKE_COMMAND} --build \${CMAKE_BINARY_DIR} --target all
+   COMMENT "Switch CMAKE_BUILD_TYPE to Release"
 )
 
 
