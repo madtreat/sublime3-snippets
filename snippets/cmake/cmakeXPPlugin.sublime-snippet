@@ -21,7 +21,7 @@ elseif(UNIX)
    set(XP_LIB_DIR "")
    # Instead, we have to add some extra command line options
    add_definitions(-shared -rdynamic -nodefaultlibs -undefined_warning)
-endif(APPLE)
+endif()
 
 link_directories(
    \${LIB_DIR}
