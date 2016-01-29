@@ -1,0 +1,32 @@
+<snippet>
+   <description>Qt5 C++ Class Header</description>
+   <content><![CDATA[
+#ifndef ${1/(.*)/\U\1\E/i:name}_H
+#define ${1/(.*)/\U\1\E/i:name}_H
+
+#include <${3:QObject}>
+${5:#include <${4:header.h}>}
+
+${7:#include "${6:header.h}"}
+
+
+class ${1:${TM_FILENAME/(.+)\..+|.*/$1/:name}} : public ${3:QObject} {
+   Q_OBJECT;
+
+public:
+   ${1:${TM_FILENAME/(.+)\..+|.*/$1/:name}}(${2:/* args, */}${3:QObject}* _parent=0);
+   ~${1:${TM_FILENAME/(.+)\..+|.*/$1/:name}}();
+
+public slots:
+   
+
+private:
+   $0
+};
+
+#endif
+
+]]></content>
+   <tabTrigger>classHqt5</tabTrigger>
+   <scope>source.c++</scope>
+</snippet>

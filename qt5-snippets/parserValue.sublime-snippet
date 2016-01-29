@@ -1,0 +1,7 @@
+<snippet>
+   <description>Qt5 Get Parser Value</description>
+   <content><![CDATA[parser.value("${1:key}").to${2:Float}()
+]]></content>
+   <tabTrigger>parserValue</tabTrigger>
+   <scope>source.c++</scope>
+</snippet>

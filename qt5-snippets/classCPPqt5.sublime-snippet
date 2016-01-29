@@ -1,0 +1,25 @@
+<snippet>
+   <description>Qt5 C++ Class Impl.</description>
+   <content><![CDATA[
+
+#include "${2:${TM_FILENAME/(.+)\..+|:(.*)/\L\1\E/i}}.h"
+
+${5:#include <${4:header.h}>}
+
+
+${1:${TM_FILENAME/(.+)\..+|.*/$1/:name}}::${1:${TM_FILENAME/(.+)\..+|.*/$1/:name}}(${3:QObject}* _parent)
+: ${3:QObject}(_parent)
+{
+
+}
+
+${1:${TM_FILENAME/(.+)\..+|.*/$1/:name}}::~${1:${TM_FILENAME/(.+)\..+|.*/$1/:name}}()
+{
+
+}
+
+
+]]></content>
+   <tabTrigger>classCPPqt5</tabTrigger>
+   <scope>source.c++</scope>
+</snippet>

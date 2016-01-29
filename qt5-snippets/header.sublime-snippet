@@ -1,0 +1,14 @@
+<snippet>
+   <description>Header Guard</description>
+   <content><![CDATA[
+#ifndef ${1:${TM_FILENAME/(.+)\..+|:(.*)/\U\1\E/i}}_H
+#define ${1:${TM_FILENAME/(.+)\..+|:(.*)/\U\1\E/i}}_H
+
+$0
+
+#endif
+
+]]></content>
+   <tabTrigger>header</tabTrigger>
+   <scope>source.c, source.c++, source.objc, source.objc++</scope>
+</snippet>
