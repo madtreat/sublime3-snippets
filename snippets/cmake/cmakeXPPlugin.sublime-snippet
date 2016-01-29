@@ -9,7 +9,7 @@ set(XP_HEADER_DIR \${XP_DIR}/CHeaders)
 if(APPLE)
    set(XP_LIB_DIR \${XP_DIR}/Libraries/Mac)
    find_library(XPLM_LIB XPLM
-      PATHS $\{XP_LIB_DIR})
+      PATHS \${XP_LIB_DIR})
    find_library(XPWidgets_LIB XPWidgets
       PATHS \${XP_LIB_DIR})
    # message(STATUS "XPLM      Framework: " \${XPLM_LIB})
