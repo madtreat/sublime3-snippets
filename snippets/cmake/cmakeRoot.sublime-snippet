@@ -8,7 +8,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 list(APPEND CMAKE_MODULE_PATH \${${1:short_name}_SOURCE_DIR}/cmake_modules)
 
 if(POLICY CMP0043)
-cmake_policy(set CMP0043 OLD)
+cmake_policy(SET CMP0043 OLD)
 endif()
 
 ################################################################################
