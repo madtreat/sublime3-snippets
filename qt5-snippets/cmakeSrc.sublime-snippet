@@ -1,0 +1,12 @@
+<snippet>
+	<description>CMake SRC-level</description>
+	<content><![CDATA[INCLUDE_DIRECTORIES(\${CMAKE_CURRENT_SOURCE_DIR})
+
+SET(CMAKE_AUTOMOC ON)
+${2:#}ADD_SUBDIRECTORY(utils)
+${2:#}ADD_SUBDIRECTORY(core)
+ADD_SUBDIRECTORY(${1:project_core_src})
+]]></content>
+	<tabTrigger>cmakeSrc</tabTrigger>
+	<scope>source.cmake</scope>
+</snippet>
