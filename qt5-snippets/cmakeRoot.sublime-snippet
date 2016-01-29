@@ -1,85 +1,85 @@
 <snippet>
    <description>CMake Root CMakeLists.txt</description>
-   <content><![CDATA[CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
-PROJECT(${1:short_name})
+   <content><![CDATA[cmake_minimum_required(VERSION 2.8.12)
+project(${1:short_name})
 
-SET(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-LIST(APPEND CMAKE_MODULE_PATH ${${1:short_name}_SOURCE_DIR}/cmake_modules)
+list(APPEND CMAKE_MODULE_PATH \${${1:short_name}_SOURCE_DIR}/cmake_modules)
 
-IF(POLICY CMP0043)
-CMAKE_POLICY(SET CMP0043 OLD)
-ENDIF(POLICY CMP0043)
+if(POLICY CMP0043)
+cmake_policy(set CMP0043 OLD)
+endif(POLICY CMP0043)
 
 ################################################################################
 # Version
 ################################################################################
-SET(${1:short_name}_MAJOR_VERSION 2)
-SET(${1:short_name}_MINOR_VERSION 3)
-SET(${1:short_name}_PATCH_VERSION 0)
-SET(${1:short_name}_VERSION ${${1:short_name}_MAJOR_VERSION}.${${1:short_name}_MINOR_VERSION}.${${1:short_name}_PATCH_VERSION})
+set(${1:short_name}_MAJOR_VERSION 2)
+set(${1:short_name}_MINOR_VERSION 3)
+set(${1:short_name}_PATCH_VERSION 0)
+set(${1:short_name}_VERSION \${${1:short_name}_MAJOR_VERSION}.\${${1:short_name}_MINOR_VERSION}.\${${1:short_name}_PATCH_VERSION})
 
 
 ################################################################################
 # Set the output directory for the build executables and libraries
 ################################################################################
-SET(${1:short_name}_RUNTIME_OUTPUT_DIRECTORY ${${1:short_name}_SOURCE_DIR}/bin CACHE PATH "Target for the binaries")
-IF(WIN32)
-   SET(${1:short_name}_LIBRARY_OUTPUT_DIRECTORY ${${1:short_name}_SOURCE_DIR}/bin CACHE PATH "Target for the libraries")
-ELSE(WIN32)
-   SET(${1:short_name}_LIBRARY_OUTPUT_DIRECTORY ${${1:short_name}_SOURCE_DIR}/lib CACHE PATH "Target for the libraries")
-ENDIF(WIN32)
-SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${${1:short_name}_LIBRARY_OUTPUT_DIRECTORY})
-SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${${1:short_name}_LIBRARY_OUTPUT_DIRECTORY})
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${${1:short_name}_RUNTIME_OUTPUT_DIRECTORY})
+set(${1:short_name}_RUNTIME_OUTPUT_DIRECTORY \${${1:short_name}_SOURCE_DIR}/bin CACHE PATH "Target for the binaries")
+if(WIN32)
+   set(${1:short_name}_LIBRARY_OUTPUT_DIRECTORY \${${1:short_name}_SOURCE_DIR}/bin CACHE PATH "Target for the libraries")
+else(WIN32)
+   set(${1:short_name}_LIBRARY_OUTPUT_DIRECTORY \${${1:short_name}_SOURCE_DIR}/lib CACHE PATH "Target for the libraries")
+endif(WIN32)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY \${${1:short_name}_LIBRARY_OUTPUT_DIRECTORY})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY \${${1:short_name}_LIBRARY_OUTPUT_DIRECTORY})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY \${${1:short_name}_RUNTIME_OUTPUT_DIRECTORY})
 
-SET(CMAKE_INSTALL_PREFIX /opt/${2:project_long_name})
-SET(CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/lib)
-#SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+set(CMAKE_INSTALL_PREFIX /opt/${2:project_long_name})
+set(CMAKE_INSTALL_RPATH \${CMAKE_INSTALL_PREFIX}/lib)
+#set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
 
 ################################################################################
 # Set the output directory for the build executables and libraries
 ################################################################################
-set(CPACK_PACKAGE_VERSION ${${1:short_name}_VERSION})
+set(CPACK_PACKAGE_VERSION \${${1:short_name}_VERSION})
 #set(CPACK_GENERATOR "${5:DEB}")
 set(CPACK_GENERATOR "${5:RPM}")
 set(CPACK_PACKAGE_NAME "${2:long_name}")
 set(CPACK_PACKAGE_RELEASE 1)
 set(CPACK_PACKAGE_CONTACT "${3:Author}")
 set(CPACK_PACKAGE_VENDOR "${4:Company|Group|Lab_Name}")
-set(CPACK_PACKAGING_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
-set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${CPACK_PACKAGE_RELEASE}.${CMAKE_SYSTEM_PROCESSOR}")
+set(CPACK_PACKAGING_INSTALL_PREFIX \${CMAKE_INSTALL_PREFIX})
+set(CPACK_PACKAGE_FILE_NAME "\${CPACK_PACKAGE_NAME}-\${CPACK_PACKAGE_VERSION}-\${CPACK_PACKAGE_RELEASE}.\${CMAKE_SYSTEM_PROCESSOR}")
 include(CPack)
 
 
 ################################################################################
 # Detect OS and define macros appropriately
 ################################################################################
-IF(WIN32)
-   ADD_DEFINITIONS(-DWINDOWS)
-   MESSAGE(STATUS "Compiling on Windows")
-   IF(MSVC)
-      MESSAGE(STATUS "Compiling with MSVC")
-      ADD_DEFINITIONS(-DNOMINMAX)
-      ADD_DEFINITIONS(-D_USE_MATH_DEFINES)
+if(WIN32)
+   add_definitions(-DWINDOWS)
+   message(STATUS "Compiling on Windows")
+   if(MSVC)
+      message(STATUS "Compiling with MSVC")
+      add_definitions(-DNOMINMAX)
+      add_definitions(-D_USE_MATH_DEFINES)
       # SSE2 optimizations
-      ADD_DEFINITIONS("/arch:SSE2")
-      IF (BUILD_SHARED_LIBS)
+      add_definitions("/arch:SSE2")
+      if (BUILD_SHARED_LIBS)
          # disable warning on missing DLL interfaces
-         ADD_DEFINITIONS("/wd4251")
-      ENDIF()
-   ENDIF(MSVC)
-ELSEIF(CYGWIN)
-   MESSAGE(STATUS "Compiling on Cygwin")
-   ADD_DEFINITIONS(-DCYGWIN)
-ELSEIF(APPLE)
-   ADD_DEFINITIONS(-DUNIX)
-   MESSAGE(STATUS "Compiling on OSX")
-ELSEIF(UNIX)
-   ADD_DEFINITIONS(-DUNIX)
-   MESSAGE(STATUS "Compiling on Unix")
-ENDIF(WIN32)
+         add_definitions("/wd4251")
+      endif()
+   endif(MSVC)
+elseif(CYGWIN)
+   message(STATUS "Compiling on Cygwin")
+   add_definitions(-DCYGWIN)
+elseif(APPLE)
+   add_definitions(-DUNIX)
+   message(STATUS "Compiling on OSX")
+elseif(UNIX)
+   add_definitions(-DUNIX)
+   message(STATUS "Compiling on Unix")
+endif(WIN32)
 
 
 ################################################################################
@@ -89,42 +89,42 @@ ENDIF(WIN32)
 # OS X 10.8 Mountain Lion and above default to using the clang compiler,
 # which does not use C++ 11 unless explicitly told to, as below.
 ################################################################################
-INCLUDE(CheckCXXCompilerFlag)
-CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
-CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
-IF(COMPILER_SUPPORTS_CXX11)
-   IF(APPLE)
-      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -stdlib=libc++ -O2")
-   ELSE(APPLE)
-      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -O2")
-   ENDIF(APPLE)
-   MESSAGE(STATUS "The compiler ${CMAKE_CXX_COMPILER} supports C++11")
-ELSEIF(COMPILER_SUPPORTS_CXX0X)
-   IF(APPLE)
-      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -stdlib=libc++ -O2")
-   ELSE(APPLE)
-      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -O2")
-   ENDIF(APPLE)
-   MESSAGE(STATUS "The compiler ${CMAKE_CXX_COMPILER} supports C++0X")
-ELSE()
-   MESSAGE(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
-ENDIF()
+include(CheckCXXCompilerFlag)
+check_cxx_compiler_flag("-std=c++11" COMPILER_SUPPORTS_CXX11)
+check_cxx_compiler_flag("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
+if(COMPILER_SUPPORTS_CXX11)
+   if(APPLE)
+      set(CMAKE_CXX_FLAGS "\${CMAKE_CXX_FLAGS} -std=c++11 -stdlib=libc++ -O2")
+   else(APPLE)
+      set(CMAKE_CXX_FLAGS "\${CMAKE_CXX_FLAGS} -std=c++11 -O2")
+   endif(APPLE)
+   message(STATUS "The compiler \${CMAKE_CXX_COMPILER} supports C++11")
+elseif(COMPILER_SUPPORTS_CXX0X)
+   if(APPLE)
+      set(CMAKE_CXX_FLAGS "\${CMAKE_CXX_FLAGS} -std=c++0x -stdlib=libc++ -O2")
+   else(APPLE)
+      set(CMAKE_CXX_FLAGS "\${CMAKE_CXX_FLAGS} -std=c++0x -O2")
+   endif(APPLE)
+   message(STATUS "The compiler \${CMAKE_CXX_COMPILER} supports C++0X")
+else()
+   message(STATUS "The compiler \${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
+endif()
 
 
 ################################################################################
 # Add a couple custom targets to quickly make a debug or release version
 ################################################################################
-SET(CMAKE_BUILD_TYPE Release)
+set(CMAKE_BUILD_TYPE Release)
 
-ADD_CUSTOM_TARGET(debug
-  COMMAND ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Debug ${CMAKE_SOURCE_DIR}
-  COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target all
+add_custom_target(debug
+  COMMAND \${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Debug \${CMAKE_SOURCE_DIR}
+  COMMAND \${CMAKE_COMMAND} --build \${CMAKE_BINARY_DIR} --target all
   COMMENT "Switch CMAKE_BUILD_TYPE to Debug"
 )
 
-ADD_CUSTOM_TARGET(release
-  COMMAND ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Release ${CMAKE_SOURCE_DIR}
-  COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target all
+add_custom_target(release
+  COMMAND \${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Release \${CMAKE_SOURCE_DIR}
+  COMMAND \${CMAKE_COMMAND} --build \${CMAKE_BINARY_DIR} --target all
   COMMENT "Switch CMAKE_BUILD_TYPE to Release"
 )
 
@@ -133,27 +133,27 @@ ADD_CUSTOM_TARGET(release
 # Project Dependencies:
 ################################################################################
 # Qt5 via Homebrew on OS X requires some fancy PREFIX_PATH changes
-IF(APPLE)
-   SET(CMAKE_PREFIX_PATH /usr/local/opt/qt5)
-ENDIF(APPLE)
-FIND_PACKAGE(Qt5Core    REQUIRED)
-FIND_PACKAGE(Qt5Widgets REQUIRED)
-FIND_PACKAGE(Qt5Gui     REQUIRED)
+if(APPLE)
+   set(CMAKE_PREFIX_PATH /usr/local/opt/qt5)
+endif(APPLE)
+find_package(Qt5Core    REQUIRED)
+find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Gui     REQUIRED)
 
 
 ################################################################################
 # Variables
 ################################################################################
-SET(LIB_DIR ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
-SET(HEADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/includes)
-SET(EXTERN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/ext)
+set(LIB_DIR \${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
+set(HEADER_DIR \${CMAKE_CURRENT_SOURCE_DIR}/includes)
+set(EXTERN_DIR \${CMAKE_CURRENT_SOURCE_DIR}/ext)
 
-LINK_DIRECTORIES(
-   ${LIB_DIR}
+link_directories(
+   \${LIB_DIR}
 )
 
-INCLUDE_DIRECTORIES(
-   ${HEADER_DIR}
+include_directories(
+   \${HEADER_DIR}
 )
 
 
@@ -161,14 +161,14 @@ INCLUDE_DIRECTORIES(
 # Build the project and local dependencies
 ################################################################################
 ${6:#TODO: Add Dependencies}
-
+$0
 
 # Project: ${1/(.*)/\U\1\E/i:name} (${7:Long Name})
-ADD_SUBDIRECTORY(src)
+add_subdirectory(src)
 
 # Project Configuration files
 # This is primarily for installation and package builds
-${8:#}ADD_SUBDIRECTORY(config)
+${8:#}add_subdirectory(config)
 
 
 ]]></content>
