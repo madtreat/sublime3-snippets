@@ -1,0 +1,141 @@
+<snippet>
+   <description>LaTeX Homework Template for CS</description>
+   <content><![CDATA[
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\geometry{a4paper}
+%\usepackage{fullpage}
+
+%\usepackage{sectsty}
+%\allsectionsfont{\sffamily\mdseries\upshape}
+
+\usepackage{graphicx}
+\usepackage[colorlinks=true, linktocpage=true]{hyperref}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{multicol}
+\usepackage{amsmath}
+
+
+%
+% Define code snippet appearance
+%
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+  belowskip=-16pt,               % reduce space below listings
+  backgroundcolor=\color{white}, % choose the background color; you must add \usepackage{color} or
+                        % \usepackage{xcolor}
+  basicstyle=\footnotesize,         % the size of the fonts that are used for the code
+  breakatwhitespace=false,       % sets if automatic breaks should only happen at whitespace
+  breaklines=true,               % sets automatic line breaking
+  captionpos=b,               % sets the caption-position to bottom
+  deletekeywords={...},          % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},        % if you want to add LaTeX within your code
+  extendedchars=true,            % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,               % adds a frame around the code
+  keepspaces=true,            % keeps spaces in text, useful for keeping indentation of code 
+                        % (possibly needs columns=flexible)
+  commentstyle=\color{mygreen},  % comment style
+  keywordstyle=\color{blue},     % keyword style
+  stringstyle=\color{mymauve},      % string literal style
+  language=C,                 % the language of the code
+  morekeywords={*,...},       % if you want to add more keywords to the set
+  numbers=none,               % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,              % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray},  % the style that is used for the line-numbers
+  stepnumber=1,               % the step between two line-numbers. If it's 1, each line will be numbered
+  rulecolor=\color{black},       % if not set, the frame-color may be changed on line-breaks within not-black text 
+                        % (e.g. comments (green here))
+  showspaces=false,           % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,        % underline spaces within strings only
+  showtabs=false,             % show tabs within strings adding particular underscores
+  tabsize=3,                  % sets default tabsize to 2 spaces
+  title=\lstname              % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+%
+% Source/Output file links
+%
+\newcommand{\readme}{\href{run:../README}{README}}
+
+\newcommand{\indir}{\href{run:../input/}{input/}}
+\newcommand{\infile}[1]{\href{run:../input/#1}{input/#1}}
+\newcommand{\inimg}[1]{../input/#1} % for graphics
+
+\newcommand{\outdir}{\href{run:../output/}{output/}}
+\newcommand{\oufile}[1]{\href{run:../output/#1}{output/#1}}
+\newcommand{\outimg}[1]{../output/#1} % for graphics
+
+\newcommand{\srcc}[1]{\href{run:../src/#1.c}{src/#1.c}}
+\newcommand{\srccpp}[1]{\href{run:../src/#1.cpp}{src/#1.cpp}}
+\newcommand{\srch}[1]{\href{run:../src/#1}{(.h)}}
+\newcommand{\srcch}[1]{\srcc{#1}\srch{#1}}
+\newcommand{\srccpph}[1]{\srccpp{#1}\srch{#1}}
+\newcommand{\srcmake}[1]{\href{run:../src/Makefile}{src/Makefile}}
+
+
+
+%
+% Header information
+%
+\title{SET TITLE}
+\author{Madison Treat}
+\date{SET DATE}
+
+
+
+%
+% Document
+%
+\begin{document}
+\lstset{language=C}
+\maketitle
+
+\vspace{2cm}
+%
+% Section Forward - build environment
+\section*{Forward}
+\label{forward}
+A few miscellaneous notes:
+\begin{itemize}
+\item All file links in this document are relative  to the ``doc'' folder and will work if this document is opened from said folder.
+\item If the file links in this document do not work, the link text is the location inside the zipped container.
+\item Each session processed is written to its own file in the \outdir~ directory.
+\item To compile, use the provided \srcmake~:
+\begin{lstlisting}[language=bash]
+\$ cd [path/to/project]/src/   # cd into the unzipped source directory
+\$ make
+\$ ./SET EXECUTABLE
+\end{lstlisting}
+\end{itemize}
+
+
+%\newpage
+%\tableofcontents
+%\vspace{1cm}
+%\listoffigures
+\newpage
+
+
+%
+% Section
+\section{Introduction}
+
+
+
+\end{document}
+
+]]></content>
+   <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+   <tabTrigger>latex-cs-hw</tabTrigger>
+   <!-- Optional: Set a scope to limit where the snippet will trigger -->
+   <scope>text.tex.latex</scope>
+</snippet>

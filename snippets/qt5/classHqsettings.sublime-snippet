@@ -1,0 +1,52 @@
+<snippet>
+  <description>Qt5 C++ QSettings Header</description>
+  <content><![CDATA[
+#ifndef ${1/(.*)/\U\1\E/i:name}_H
+#define ${1/(.*)/\U\1\E/i:name}_H
+
+#include <QObject>
+#include <QString>
+
+${7:#include <${6:header.h}>}
+
+${5:#include "${4:${3:mod-short-name}consts.h}"}
+
+
+class QSettings;
+
+
+class ${1:${TM_FILENAME/(.+)\..+|.*/$1/:name}} : public QObject {
+  Q_OBJECT;
+
+public:
+  explicit ${1:${TM_FILENAME/(.+)\..+|.*/$1/:name}}(QString _filename, QObject* _parent = 0);
+  explicit ${1:${TM_FILENAME/(.+)\..+|.*/$1/:name}}(const ${1:${TM_FILENAME/(.+)\..+|.*/$1/:name}}& orig) = delete;
+  ~${1:${TM_FILENAME/(.+)\..+|.*/$1/:name}}();
+
+  QString   configDir()       const {return m_configDir;}
+  QString   appRootDir()      const {return m_appRootDir;}
+  QString   userHomeDir()     const {return m_userHomeDir;}
+  QString   settingsFile()    const {return m_settingsFile;}
+
+  ${8:UUID      uuid()            const {return m_uuid;}}
+
+public slots:
+  void loadSettingsFile(QString _filename);
+
+private:
+  QSettings*  settings;
+  QString     m_configDir;
+  QString     m_appRootDir;
+  QString     m_userHomeDir;
+  QString     m_settingsFile;
+
+  $0
+};
+
+#endif  // ${1/(.*)/\U\1\E/i:name}_H
+
+
+]]></content>
+  <tabTrigger>classHqsettings</tabTrigger>
+  <scope>source.c++</scope>
+</snippet>

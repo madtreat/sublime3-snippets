@@ -1,0 +1,9 @@
+<snippet>
+  <description>QSettings Read Item</description>
+  <content><![CDATA[
+m_${1:varName} = settings->value("${2:INI-name}").to${3:varType}();
+$0
+]]></content>
+  <tabTrigger>qsettingsread</tabTrigger>
+  <scope>source.c++</scope>
+</snippet>

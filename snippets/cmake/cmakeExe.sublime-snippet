@@ -1,40 +1,40 @@
 <snippet>
-   <description>CMake EXE-level</description>
-   <content><![CDATA[project(${1:project-name})
+  <description>CMake EXE-level</description>
+  <content><![CDATA[project(${1:project-name})
 
 set(SOURCES
-   ${2:files.cpp}
+  ${2:files.cpp}
 )
 
 set(HEADERS
-   ${3:files.h}
+  ${3:files.h}
 )
 
 ${5:#}set(RESOURCES
-${5:#}   ${4:./path/to/resources.qrc}
+${5:#}  ${4:./path/to/resources.qrc}
 ${5:#})
 ${5:#}qt5_add_resources(QRC \${RESOURCES})
 ${5:#}set_source_files_properties(\${QRC} PROPERTIES GENERATED ON)
 
 
 add_executable(\${PROJECT_NAME}
-   main.cpp
-   \${SOURCES}
-   \${MOC_SRC}
-   ${6:#}\${QRC}
+  main.cpp
+  \${SOURCES}
+  \${MOC_SRC}
+  ${6:#}\${QRC}
 )
 
 target_link_libraries(\${PROJECT_NAME}
-   \${Qt5Core_LIBRARIES}
-   \${Qt5Widgets_LIBRARIES}
-   \${Qt5Gui_LIBRARIES}
-   ${0:ext_libraries}
+  \${Qt5Core_LIBRARIES}
+  \${Qt5Widgets_LIBRARIES}
+  \${Qt5Gui_LIBRARIES}
+  ${0:ext_libraries}
 )
 
 install(TARGETS \${PROJECT_NAME} DESTINATION bin)
 
 
 ]]></content>
-   <tabTrigger>cmakeExe</tabTrigger>
-   <scope>source.cmake</scope>
+  <tabTrigger>cmakeExe</tabTrigger>
+  <scope>source.cmake</scope>
 </snippet>

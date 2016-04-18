@@ -1,6 +1,6 @@
 <snippet>
-   <description>CMake ROOT-level</description>
-   <content><![CDATA[cmake_minimum_required(VERSION 2.8.12)
+  <description>CMake ROOT-level</description>
+  <content><![CDATA[cmake_minimum_required(VERSION 2.8.12)
 project(${1:short_name})
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -25,9 +25,9 @@ set(${1:short_name}_VERSION \${${1:short_name}_MAJOR_VERSION}.\${${1:short_name}
 ################################################################################
 set(${1:short_name}_RUNTIME_OUTPUT_DIRECTORY \${${1:short_name}_SOURCE_DIR}/bin CACHE PATH "Target for the binaries")
 if(WIN32)
-   set(${1:short_name}_LIBRARY_OUTPUT_DIRECTORY \${${1:short_name}_SOURCE_DIR}/bin CACHE PATH "Target for the libraries")
+  set(${1:short_name}_LIBRARY_OUTPUT_DIRECTORY \${${1:short_name}_SOURCE_DIR}/bin CACHE PATH "Target for the libraries")
 else()
-   set(${1:short_name}_LIBRARY_OUTPUT_DIRECTORY \${${1:short_name}_SOURCE_DIR}/lib CACHE PATH "Target for the libraries")
+  set(${1:short_name}_LIBRARY_OUTPUT_DIRECTORY \${${1:short_name}_SOURCE_DIR}/lib CACHE PATH "Target for the libraries")
 endif()
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY \${${1:short_name}_LIBRARY_OUTPUT_DIRECTORY})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY \${${1:short_name}_LIBRARY_OUTPUT_DIRECTORY})
@@ -57,28 +57,28 @@ include(CPack)
 # Detect OS and define macros appropriately
 ################################################################################
 if(WIN32)
-   add_definitions(-DWINDOWS)
-   message(STATUS "Compiling on Windows")
-   if(MSVC)
-      message(STATUS "Compiling with MSVC")
-      add_definitions(-DNOMINMAX)
-      add_definitions(-D_USE_MATH_DEFINES)
-      # SSE2 optimizations
-      add_definitions("/arch:SSE2")
-      if(BUILD_SHARED_LIBS)
-         # disable warning on missing DLL interfaces
-         add_definitions("/wd4251")
-      endif()
-   endif()
+  add_definitions(-DWINDOWS)
+  message(STATUS "Compiling on Windows")
+  if(MSVC)
+    message(STATUS "Compiling with MSVC")
+    add_definitions(-DNOMINMAX)
+    add_definitions(-D_USE_MATH_DEFINES)
+    # SSE2 optimizations
+    add_definitions("/arch:SSE2")
+    if(BUILD_SHARED_LIBS)
+      # disable warning on missing DLL interfaces
+      add_definitions("/wd4251")
+    endif()
+  endif()
 elseif(CYGWIN)
-   message(STATUS "Compiling on Cygwin")
-   add_definitions(-DCYGWIN)
+  message(STATUS "Compiling on Cygwin")
+  add_definitions(-DCYGWIN)
 elseif(APPLE)
-   add_definitions(-DUNIX)
-   message(STATUS "Compiling on OSX")
+  add_definitions(-DUNIX)
+  message(STATUS "Compiling on OSX")
 elseif(UNIX)
-   add_definitions(-DUNIX)
-   message(STATUS "Compiling on Unix")
+  add_definitions(-DUNIX)
+  message(STATUS "Compiling on Unix")
 endif()
 
 
@@ -93,21 +93,21 @@ include(CheckCXXCompilerFlag)
 check_cxx_compiler_flag("-std=c++11" COMPILER_SUPPORTS_CXX11)
 check_cxx_compiler_flag("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
 if(COMPILER_SUPPORTS_CXX11)
-   if(APPLE)
-      set(CMAKE_CXX_FLAGS "\${CMAKE_CXX_FLAGS} -std=c++11 -stdlib=libc++ -O2")
-   else()
-      set(CMAKE_CXX_FLAGS "\${CMAKE_CXX_FLAGS} -std=c++11 -O2")
-   endif()
-   message(STATUS "The compiler \${CMAKE_CXX_COMPILER} supports C++11")
+  if(APPLE)
+    set(CMAKE_CXX_FLAGS "\${CMAKE_CXX_FLAGS} -std=c++11 -stdlib=libc++ -O2")
+  else()
+    set(CMAKE_CXX_FLAGS "\${CMAKE_CXX_FLAGS} -std=c++11 -O2")
+  endif()
+  message(STATUS "The compiler \${CMAKE_CXX_COMPILER} supports C++11")
 elseif(COMPILER_SUPPORTS_CXX0X)
-   if(APPLE)
-      set(CMAKE_CXX_FLAGS "\${CMAKE_CXX_FLAGS} -std=c++0x -stdlib=libc++ -O2")
-   else()
-      set(CMAKE_CXX_FLAGS "\${CMAKE_CXX_FLAGS} -std=c++0x -O2")
-   endif()
-   message(STATUS "The compiler \${CMAKE_CXX_COMPILER} supports C++0X")
+  if(APPLE)
+    set(CMAKE_CXX_FLAGS "\${CMAKE_CXX_FLAGS} -std=c++0x -stdlib=libc++ -O2")
+  else()
+    set(CMAKE_CXX_FLAGS "\${CMAKE_CXX_FLAGS} -std=c++0x -O2")
+  endif()
+  message(STATUS "The compiler \${CMAKE_CXX_COMPILER} supports C++0X")
 else()
-   message(STATUS "The compiler \${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
+  message(STATUS "The compiler \${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 
 
@@ -117,15 +117,15 @@ endif()
 set(CMAKE_BUILD_TYPE Release)
 
 add_custom_target(debug
-   COMMAND \${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Debug \${CMAKE_SOURCE_DIR}
-   COMMAND \${CMAKE_COMMAND} --build \${CMAKE_BINARY_DIR} --target all
-   COMMENT "Switch CMAKE_BUILD_TYPE to Debug"
+  COMMAND \${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Debug \${CMAKE_SOURCE_DIR}
+  COMMAND \${CMAKE_COMMAND} --build \${CMAKE_BINARY_DIR} --target all
+  COMMENT "Switch CMAKE_BUILD_TYPE to Debug"
 )
 
 add_custom_target(release
-   COMMAND \${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Release \${CMAKE_SOURCE_DIR}
-   COMMAND \${CMAKE_COMMAND} --build \${CMAKE_BINARY_DIR} --target all
-   COMMENT "Switch CMAKE_BUILD_TYPE to Release"
+  COMMAND \${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Release \${CMAKE_SOURCE_DIR}
+  COMMAND \${CMAKE_COMMAND} --build \${CMAKE_BINARY_DIR} --target all
+  COMMENT "Switch CMAKE_BUILD_TYPE to Release"
 )
 
 
@@ -134,7 +134,7 @@ add_custom_target(release
 ################################################################################
 # Qt5 via Homebrew on OS X requires some fancy PREFIX_PATH changes
 if(APPLE)
-   set(CMAKE_PREFIX_PATH /usr/local/opt/qt5)
+  set(CMAKE_PREFIX_PATH /usr/local/opt/qt5)
 endif()
 find_package(Qt5Core    REQUIRED)
 find_package(Qt5Widgets REQUIRED)
@@ -149,11 +149,11 @@ set(HEADER_DIR \${CMAKE_CURRENT_SOURCE_DIR}/includes)
 set(EXTERN_DIR \${CMAKE_CURRENT_SOURCE_DIR}/ext)
 
 link_directories(
-   \${LIB_DIR}
+  \${LIB_DIR}
 )
 
 include_directories(
-   \${HEADER_DIR}
+  \${HEADER_DIR}
 )
 
 
@@ -172,6 +172,6 @@ ${8:#}add_subdirectory(config)
 
 
 ]]></content>
-   <tabTrigger>cmakeRoot</tabTrigger>
-   <scope>source.cmake</scope>
+  <tabTrigger>cmakeRoot</tabTrigger>
+  <scope>source.cmake</scope>
 </snippet>

@@ -1,0 +1,8 @@
+<snippet>
+  <description>Qt5 TCP Socket</description>
+  <content><![CDATA[
+QTcpSocket* socket
+]]></content>
+  <tabTrigger>cppqt5tcpsocket</tabTrigger>
+  <scope>source.c++</scope>
+</snippet>

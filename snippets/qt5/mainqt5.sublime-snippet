@@ -1,6 +1,6 @@
 <snippet>
-   <description>Qt5 main.cpp with parser</description>
-   <content><![CDATA[
+  <description>Qt5 main.cpp with parser</description>
+  <content><![CDATA[
 #include <QCoreApplication>
 #include <QApplication>
 #include <QCommandLineParser>
@@ -9,30 +9,30 @@
 
 int main(int argc, char* argv[])
 {
-   QApplication app(argc, argv);
-   QCoreApplication::setApplicationName("${1:name}");
-   QCoreApplication::setApplicationVersion("1.0.0");
+  QApplication app(argc, argv);
+  QCoreApplication::setApplicationName("${1:name}");
+  QCoreApplication::setApplicationVersion("1.0.0");
 
-   QCommandLineParser parser;
-   parser.setApplicationDescription("${1:name} Help");
-   parser.addHelpOption();
-   parser.addVersionOption();
+  QCommandLineParser parser;
+  parser.setApplicationDescription("${1:name} Help");
+  parser.addHelpOption();
+  parser.addVersionOption();
 
-   parser.addOptions({
-      {
-         {"v", "verbose"},
-         QCoreApplication::translate("main", "Print verbose output")
-      }
-   });
-   parser.process(app);
+  parser.addOptions({
+    {
+      {"v", "verbose"},
+      QCoreApplication::translate("main", "Print verbose output")
+    }
+  });
+  parser.process(app);
 
-   $0
+  $0
 
-   return app.exec();
+  return app.exec();
 }
 
 
 ]]></content>
-   <tabTrigger>mainqt5</tabTrigger>
-   <scope>source.c++</scope>
+  <tabTrigger>mainqt5</tabTrigger>
+  <scope>source.c++</scope>
 </snippet>

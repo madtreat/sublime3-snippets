@@ -1,40 +1,40 @@
 <snippet>
-   <description>CMake Vars for XPlane Plugins</description>
-   <content><![CDATA[set(LIB_DIR \${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
+  <description>CMake Vars for XPlane Plugins</description>
+  <content><![CDATA[set(LIB_DIR \${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 set(HEADER_DIR \${CMAKE_CURRENT_SOURCE_DIR}/includes)
 set(EXTERN_DIR \${CMAKE_CURRENT_SOURCE_DIR}/ext)
 
 set(XP_DIR \${EXTERN_DIR}/xplane-sdk)
 set(XP_HEADER_DIR \${XP_DIR}/CHeaders)
 if(APPLE)
-   set(XP_LIB_DIR \${XP_DIR}/Libraries/Mac)
-   find_library(XPLM_LIB XPLM
-      PATHS \${XP_LIB_DIR})
-   find_library(XPWidgets_LIB XPWidgets
-      PATHS \${XP_LIB_DIR})
-   # message(STATUS "XPLM      Framework: " \${XPLM_LIB})
-   # message(STATUS "XPWidgets Framework: " \${XPWidgets_LIB})
+  set(XP_LIB_DIR \${XP_DIR}/Libraries/Mac)
+  find_library(XPLM_LIB XPLM
+    PATHS \${XP_LIB_DIR})
+  find_library(XPWidgets_LIB XPWidgets
+    PATHS \${XP_LIB_DIR})
+  # message(STATUS "XPLM      Framework: " \${XPLM_LIB})
+  # message(STATUS "XPWidgets Framework: " \${XPWidgets_LIB})
 elseif(WIN32)
-   set(XP_LIB_DIR \${XP_DIR}/Libraries/Win)
+  set(XP_LIB_DIR \${XP_DIR}/Libraries/Win)
 elseif(UNIX)
-   # There is no library linking for linux
-   set(XP_LIB_DIR "")
-   # Instead, we have to add some extra command line options
-   add_definitions(-shared -rdynamic -nodefaultlibs -undefined_warning)
+  # There is no library linking for linux
+  set(XP_LIB_DIR "")
+  # Instead, we have to add some extra command line options
+  add_definitions(-shared -rdynamic -nodefaultlibs -undefined_warning)
 endif()
 
 link_directories(
-   \${LIB_DIR}
-   \${XP_LIB_DIR}
+  \${LIB_DIR}
+  \${XP_LIB_DIR}
 )
 
 include_directories(
-   \${HEADER_DIR}
-   \${XP_HEADER_DIR}/XPLM
-   \${XP_HEADER_DIR}/Widgets
+  \${HEADER_DIR}
+  \${XP_HEADER_DIR}/XPLM
+  \${XP_HEADER_DIR}/Widgets
 )
 $0
 ]]></content>
-   <tabTrigger>cmakeXPlanePluginVars</tabTrigger>
-   <scope>source.cmake</scope>
+  <tabTrigger>cmakeXPlanePluginVars</tabTrigger>
+  <scope>source.cmake</scope>
 </snippet>

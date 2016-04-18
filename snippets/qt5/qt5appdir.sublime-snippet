@@ -1,0 +1,41 @@
+<snippet>
+  <description>Qt5 App Dir</description>
+  <content><![CDATA[
+settings = NULL;
+  m_userHomeDir = QDir::home().absolutePath();
+
+  // Get config file from [application root directory]/config
+  m_appRootDir = QCoreApplication::applicationDirPath();
+  QDir appRoot(m_appRootDir);
+
+  appRoot.cdUp();
+  m_configDir = appRoot.absolutePath() + "/config";
+
+  if (_filename == "") {
+    m_settingsFile = m_configDir + "/cpd-settings.ini";
+  }
+  else {
+    m_settingsFile = _filename;
+    m_configDir = QFileInfo(m_settingsFile).absolutePath();
+  }
+
+  if (!QFile::exists(m_settingsFile)) {
+    qWarning() << "Warning: Settings file" << m_settingsFile << "does not exist.";
+    m_configDir = m_userHomeDir + "/.cpdisplay";
+    m_settingsFile = m_configDir + "/cpd-settings.ini";
+    qWarning() << "   Trying" << m_settingsFile << "...";
+    if (!QFile::exists(m_settingsFile)) {
+      qWarning() << "   File not found\n";
+      qWarning() << "ERROR: No valid config files found.";
+      qWarning() << "NOTE: you can specify a config file with the '-c <settings.ini>' option.";
+      qWarning() << "Exiting.";
+      exit(1);
+    }
+  }
+
+  loadSettingsFile(m_settingsFile);
+  qDebug() << "Loaded settings file:" << m_settingsFile;
+]]></content>
+  <tabTrigger>cppqt5appdir</tabTrigger>
+  <scope>source.c++</scope>
+</snippet>

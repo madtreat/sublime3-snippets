@@ -1,6 +1,6 @@
 <snippet>
-   <description>Qt5 C++ Class Header</description>
-   <content><![CDATA[
+  <description>Qt5 C++ Class Header</description>
+  <content><![CDATA[
 #ifndef ${1/(.*)/\U\1\E/i:name}_H
 #define ${1/(.*)/\U\1\E/i:name}_H
 
@@ -11,22 +11,22 @@ ${7:#include "${6:header.h}"}
 
 
 class ${1:${TM_FILENAME/(.+)\..+|.*/$1/:name}} : public ${3:QObject} {
-   Q_OBJECT;
+  Q_OBJECT;
 
 public:
-   ${1:${TM_FILENAME/(.+)\..+|.*/$1/:name}}(${2:/* args, */}${3:QObject}* _parent=0);
-   ~${1:${TM_FILENAME/(.+)\..+|.*/$1/:name}}();
+  explicit ${1:${TM_FILENAME/(.+)\..+|.*/$1/:name}}(${2:/* args, */}${3:QObject}* _parent=0);
+  explicit ${1:${TM_FILENAME/(.+)\..+|.*/$1/:name}}(const ${1:${TM_FILENAME/(.+)\..+|.*/$1/:name}}& orig) = delete;
+  ~${1:${TM_FILENAME/(.+)\..+|.*/$1/:name}}();
 
 public slots:
-   
 
 private:
-   $0
+  $0
 };
 
-#endif
+#endif  // ${1/(.*)/\U\1\E/i:name}_H
 
 ]]></content>
-   <tabTrigger>classHqt5</tabTrigger>
-   <scope>source.c++</scope>
+  <tabTrigger>classHqt5</tabTrigger>
+  <scope>source.c++</scope>
 </snippet>
