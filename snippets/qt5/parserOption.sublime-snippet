@@ -1,12 +1,12 @@
 <snippet>
   <description>Qt5 Add Parser Option</description>
-  <content><![CDATA[${7:,}
+  <content><![CDATA[${8:,}
 {
   {"${1:short}", "${2:long}"},
-  QCoreApplication::translate("main", "${3:description}"),
-  QCoreApplication::translate("main", "${4:key}"),
-  QString::number("${5:default}")
-}${6:,}
+  QCoreApplication::translate("main", "${3:description}")${5:,
+  QCoreApplication::translate("main", "${4:key}")}${7:,
+  QString::number("${6:default}")}
+}${9:,}
 ]]></content>
   <tabTrigger>parserOption</tabTrigger>
   <scope>source.c++</scope>
